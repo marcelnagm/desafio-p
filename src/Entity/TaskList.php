@@ -23,7 +23,14 @@ class TaskList {
 
     #[ORM\Column(length: 50)]
     private ?string $description = null;
- 
+
+    #[ORM\OneToMany(targetEntity: "Task", mappedBy: "tasklist")]
+    private $tasks;
+
+    #[ORM\ManyToOne(targetEntity: "User", inversedBy: "tasklist")]
+    #[ORM\JoinColumn(name: 'created_by', referencedColumnName: "id")]
+    private $user;
+
     /**
      * @return Collection|Booking[]
      */
@@ -40,6 +47,7 @@ class TaskList {
 
         return $this;
     }
+
 //
 //    public function getTasks(): PersistentCollection {
 //        return $this->tasks;
@@ -53,5 +61,9 @@ class TaskList {
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getTasks() {
+        return $this->tasks;
     }
 }

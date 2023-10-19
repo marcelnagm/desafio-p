@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\DBAL\Logging\EchoSQLLogger;
 
 
 
@@ -17,13 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskListController extends AbstractController {
 
     #[Route('/', name: 'app_tasklist_index', methods: ['GET'])]
-    public function index(TaskListRepository $taskRepository): Response {
-        $data = [];
-        foreach ($taskRepository->findBy(['created_by' =>$this->getUser()->getId()]) as $key) {
-            $data[$key->getId()] = $key->toArray();
-        }
+    public function index( EntityManagerInterface $entityManager): Response {
+
+// old school
+//        $data = [];
+//        foreach ($taskRepository->findBy(['created_by' =>$this->getUser()->getId()]) as $key) {
+//            $data[$key->getId()] = $key->toArray();
+//        }
+        
         return $this->json([
-                    'tasks' => $data,
+                    'tasks' => $this->getUser()->getTasklist()->toArray(),
         ]);
     }
 
@@ -62,15 +66,14 @@ class TaskListController extends AbstractController {
         $user = $this->getUser();
         if ($task->getCreatedBy() != $user->getId())
             return $this->json(['msg' => 'erro ao exibir, ele nao eh seu']);
-        $data =[];
-        foreach ($entityManager->getRepository('\\App\\Entity\\Task')->findBy(['tasklist_id' => $task->getId()]) as $key) {
-            $data[$key->getId()] = $key->toArray();
-        }
+        
+//        dd($task->getTasks()->toArray());
+      
         
         
         return $this->json([
                     'taskslist' => $task->toArray(),
-                    'tasks' => $data
+                    'tasks' => $task->getTasks()->toArray()
         ]);
     }
 
