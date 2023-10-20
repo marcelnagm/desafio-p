@@ -3,7 +3,8 @@
 		"_postman_id": "fcf7d717-a8b1-40c7-90e9-154463d0e76f",
 		"name": "Pigz",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15733546"
+		"_exporter_id": "15733546",
+		"_collection_link": "https://martian-comet-623951.postman.co/workspace/my-work~6c556387-3ac4-4ca1-a9bc-da85cf5ff4e2/collection/15733546-fcf7d717-a8b1-40c7-90e9-154463d0e76f?action=share&source=collection_link&creator=15733546"
 	},
 	"item": [
 		{
@@ -120,13 +121,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}api/task/7/edit",
+							"raw": "{{url}}api/task/1/edit",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"task",
-								"7",
+								"1",
 								"edit"
 							]
 						}
@@ -136,6 +137,16 @@
 				{
 					"name": "Show",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -262,6 +273,11 @@
 									"key": "description",
 									"value": "MInha Lista",
 									"type": "text"
+								},
+								{
+									"key": "created_by",
+									"value": "1",
+									"type": "text"
 								}
 							]
 						},
@@ -272,6 +288,156 @@
 							],
 							"path": [
 								"tasklist",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "teste de update",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}api/tasklist/1/edit",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"tasklist",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/tasklist/1",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"tasklist",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}task/1",
+							"host": [
+								"{{url}}task"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TaskSahre",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/taskshare",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"taskshare"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tasklist_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "shared_with",
+									"value": "user@tu.com.br",
+									"description": "email do usuario a ser compatilhado",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}api/taskshare/new",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"taskshare",
 								"new"
 							]
 						}
@@ -478,7 +644,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"marcel@tu.com.br\",\n    \"password\" : \"12345678\"\n\n\n}",
+					"raw": "{\n    \"username\": \"teste@tu.com.br\",\n    \"password\" : \"12345678\"\n\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
