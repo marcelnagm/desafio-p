@@ -36,14 +36,6 @@ class Task {
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $finished_at = null;
 
-    #[ORM\ManyToOne(targetEntity: "TaskList", inversedBy: "tasks")]
-    #[ORM\JoinColumn(name: 'tasklist_id', referencedColumnName: "id")]
-    private $tasklist;
-
-    
-     #[ORM\ManyToOne(targetEntity: "User", inversedBy: "tasks")]
-    #[ORM\JoinColumn(name: 'created_by', referencedColumnName: "id")]
-    private $allList;
     
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $tasklist_id = null;

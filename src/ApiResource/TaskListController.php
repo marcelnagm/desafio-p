@@ -21,14 +21,14 @@ class TaskListController extends AbstractController {
     public function index( EntityManagerInterface $entityManager): Response {
 
 // old school
-//        $data = [];
-//        foreach ($taskRepository->findBy(['created_by' =>$this->getUser()->getId()]) as $key) {
-//            $data[$key->getId()] = $key->toArray();
-//        }
+        $data = [];
+        foreach ($taskRepository->findBy(['created_by' =>$this->getUser()->getId()]) as $key) {
+            $data[$key->getId()] = $key->toArray();
+        }
         
-        return $this->json([
-                    'tasks' => $this->getUser()->getTasklist()->toArray(),
-        ]);
+//        return $this->json([
+//                    'tasks' => $this->getUser()->getTasklist()->toArray(),
+//        ]);
     }
 
     #[Route('/new', name: 'app_tasklist_new', methods: ['POST'])]
